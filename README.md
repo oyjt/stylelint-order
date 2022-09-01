@@ -9,16 +9,15 @@
 stylelint-order配置文件是.stylelintrc.js，如果项目中存在.stylelintrc.js文件，以项目中的配置为准。
 点击菜单工具 -> 插件配置 -> stylelint-order -> .stylelintrc.js，即可打开配置文件。
 
-## 如何增加其它规则？
+## 如何修改排序规则？
 
-修改.stylelintrc.js文件，添加选项，比如: 
+修改.stylelintrc.js文件，在`order/properties-order`属性中调整排序规则，比如: 
 
 ```javascript
-
-  module.exports = {
-    "extends": "stylelint-config-recommended",
-	"plugins": ["stylelint-order"],
-    "rules":{
+module.exports = {
+	extends: "stylelint-config-standard",
+	plugins: ["stylelint-order"],
+	rules: {
 		"order/order": [
 			"custom-properties",
 			"declarations"
@@ -281,8 +280,31 @@ stylelint-order配置文件是.stylelintrc.js，如果项目中存在.stylelintr
 			"-webkit-overflow-scrolling",
 			"-webkit-text-fill-color",
 			"-webkit-tap-highlight-color"
-		]
-    }
-  }
-
+		],
+		"rule-empty-line-before": "never"
+		/* eslint-enable quote-props */
+	}
+}
 ```
+
+MIT License
+
+Copyright (c) 2022 江阳小道
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
