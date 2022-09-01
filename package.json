@@ -1,0 +1,59 @@
+{
+	"name": "stylelint-order",
+	"displayName": "stylelint-order",
+	"description": "一个用于stylelint的排序规则插件。",
+	"version": "1.0.0",
+	"publisher": "江阳小道",
+	"engines": {
+		"HBuilderX": "^3.2.6"
+	},
+	"categories": [
+		"Formatters"
+	],
+	"main": "./extension",
+	"activationEvents": [
+		"onCommand:stylelint.formatter",
+		"onLanguage:nvue",
+		"onLanguage:vue",
+		"onLanguage:css",
+		"onLanguage:less",
+		"onLanguage:sass",
+		"onLanguage:scss"
+	],
+	"contributes": {
+		"commands": [{
+			"command": "stylelint.formatter",
+			"title": "样式格式化"
+		}],
+		"menus": {
+			"editor/context": [
+				{
+					"command": "stylelint.formatter",
+					"group": "assist",
+					"when": "editorTextFocus"
+				}
+			]
+		},
+		"keybindings": [{
+			"mac": "cmd+shift+i",
+			"win": "shift+f10",
+			"key": "shift+f10",
+			"command": "stylelint.formatter",
+			"when": "editorTextFocus"
+		}]
+	},
+	"configurationFiles": [
+		".stylelintrc.js"
+	],
+	"configurationFileInfos": {
+		".stylelintrc.js": {
+			"description": "配置stylelint-order排序规则"
+		}
+	},
+	"dependencies": {
+		"csslint": "^1.0.5",
+		"stylelint": "^14.10.0",
+		"stylelint-config-standard": "^27.0.0",
+		"stylelint-order": "^5.0.0"
+	}
+}
