@@ -147,9 +147,11 @@ function activate(context) {
 			textEditor.edit(builder => {
 				builder.replace(range, res.output);
 			})
+			// 执行系统格式化
+			hx.commands.executeCommand("editor.action.format")
 		}).catch(err => showOutput(err.stack));
 	});
-
+	
 	//订阅销毁钩子，插件禁用的时候，自动注销该command。
 	context.subscriptions.push(onCommand)
 }

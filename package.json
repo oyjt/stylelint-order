@@ -21,10 +21,12 @@
 		"onLanguage:scss"
 	],
 	"contributes": {
-		"commands": [{
-			"command": "stylelint.formatter",
-			"title": "样式格式化"
-		}],
+		"commands": [
+			{
+				"command": "stylelint.formatter",
+				"title": "样式格式化"
+			}
+		],
 		"menus": {
 			"editor/context": [
 				{
@@ -34,13 +36,14 @@
 				}
 			]
 		},
-		"keybindings": [{
-			"mac": "cmd+shift+i",
-			"win": "shift+f10",
-			"key": "shift+f10",
-			"command": "stylelint.formatter",
-			"when": "editorTextFocus"
-		}]
+		"keybindings": [
+			{
+				"macosx": "command+shift+i",
+				"key": "shift+f10",
+				"command": "stylelint.formatter",
+				"when": "editorTextFocus"
+			}
+		]
 	},
 	"configurationFiles": [
 		".stylelintrc.js"
@@ -51,7 +54,6 @@
 		}
 	},
 	"dependencies": {
-		"csslint": "^1.0.5",
 		"stylelint": "^14.10.0",
 		"stylelint-config-standard": "^27.0.0",
 		"stylelint-order": "^5.0.0"
