@@ -15,7 +15,7 @@ stylelint-order配置文件是.stylelintrc.js，如果项目中存在.stylelintr
 点击菜单工具 -> 插件配置 -> stylelint-order -> .stylelintrc.js，即可打开配置文件。
 
 ## 排序顺序
-使用的是BootStrap的CSS排序规则，相关的属性声明应当归为一组，并按照下面的顺序排列：
+使用的是Bootstrap的CSS排序规则，相关的属性声明应当归为一组，并按照下面的顺序排列：
 
 1. Positioning
 2. Box model
