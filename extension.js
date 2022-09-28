@@ -151,9 +151,51 @@ function activate(context) {
 			hx.commands.executeCommand("editor.action.format")
 		}).catch(err => showOutput(err.stack));
 	});
-	
+
+	const onSave = hx.workspace.onWillSaveTextDocument(function(event) {
+		const {
+			document
+		} = event;
+		const {
+			languageId,
+			fileName
+		} = document;
+		const settings = hx.workspace.getConfiguration('stylelint-order');
+		const autoFixOnSave = settings.get('autoFixOnSave', false)
+		if (!autoFixOnSave) return null;
+		const block = getBlock({
+			languageId,
+			document
+		});
+		console.log('block', block);
+		if (!block) return;
+		const {
+			range,
+			content,
+			syntax
+		} = block;
+
+		const _options = require("./.stylelintrc.js")
+		if (process.env.EXTENSION_DATA_DIR &&
+			fs.existsSync(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js")) {
+			_options = require(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js");
+		}
+		stylelint.lint({
+			code: content,
+			config: _options,
+			configBasedir: path.join(__dirname, "/"),
+			fix: true
+		}).then((res) => {
+			console.log('res', res.output);
+			hx.TextEdit.replace(range, res.output)
+			// 执行系统格式化
+			hx.commands.executeCommand("editor.action.format")
+		}).catch(err => showOutput(err.stack));
+	});
+
 	//订阅销毁钩子，插件禁用的时候，自动注销该command。
 	context.subscriptions.push(onCommand)
+	context.subscriptions.push(onSave)
 }
 //该方法将在插件禁用的时候调用（目前是在插件卸载的时候触发）
 function deactivate() {
