@@ -8,12 +8,13 @@
 
 1. 安装插件后，在HBuilde X中打开html、vue、nvue、css、less、scss、sass等文件
 2. 右击选择【样式格式化】即可对样式进行自动排序
-3. 启用插件之后，支持保存时自动格式化
 
 ## 配置文件，如何配置选项？
 
 stylelint-order配置文件是.stylelintrc.js，如果项目中存在.stylelintrc.js文件，以项目中的配置为准。
 点击菜单工具 -> 插件配置 -> stylelint-order -> .stylelintrc.js，即可打开配置文件。
+
+> 经过测试HBuilderX 中使用ctrl+s不会触发保存时自动格式化，具体原因未知，可能是编译器的限制导致的。
 
 ## 排序顺序
 使用的是Bootstrap的CSS排序规则，相关的属性声明应当归为一组，并按照下面的顺序排列：
