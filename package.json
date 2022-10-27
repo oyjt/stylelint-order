@@ -3,7 +3,7 @@
 	"id": "stylelint-order",
 	"displayName": "stylelint-order",
 	"description": "一个基于stylint和bootstrap规范的样式排序插件。",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"publisher": "江阳小道",
 	"engines": {
 		"HBuilderX": "^3.2.6"
