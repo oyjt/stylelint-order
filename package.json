@@ -30,7 +30,7 @@
 			"properties": {
 				"stylelint-order.autoFixOnSave": {
 					"type": "boolean",
-					"default": true,
+					"default": false,
 					"description": "保存时自动格式化"
 				}
 			}
