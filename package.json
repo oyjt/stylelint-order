@@ -3,7 +3,7 @@
 	"id": "stylelint-order",
 	"displayName": "stylelint-order",
 	"description": "一个基于stylint和bootstrap规范的样式排序插件。",
-	"version": "1.0.3",
+	"version": "1.0.5",
 	"publisher": "江阳小道",
 	"engines": {
 		"HBuilderX": "^3.2.6"
@@ -21,10 +21,12 @@
 		"onLanguage:scss"
 	],
 	"contributes": {
-		"commands": [{
-			"command": "stylelint.formatter",
-			"title": "样式格式化"
-		}],
+		"commands": [
+			{
+				"command": "stylelint.formatter",
+				"title": "样式格式化"
+			}
+		],
 		"configuration": {
 			"title": "stylelint-order",
 			"properties": {
@@ -36,18 +38,22 @@
 			}
 		},
 		"menus": {
-			"editor/context": [{
-				"command": "stylelint.formatter",
-				"group": "assist",
-				"when": "editorTextFocus"
-			}]
+			"editor/context": [
+				{
+					"command": "stylelint.formatter",
+					"group": "assist",
+					"when": "editorTextFocus"
+				}
+			]
 		},
-		"keybindings": [{
-			"macosx": "command+shift+i",
-			"key": "shift+f10",
-			"command": "stylelint.formatter",
-			"when": "editorTextFocus"
-		}]
+		"keybindings": [
+			{
+				"macosx": "command+shift+i",
+				"key": "shift+f10",
+				"command": "stylelint.formatter",
+				"when": "editorTextFocus"
+			}
+		]
 	},
 	"configurationFiles": [
 		".stylelintrc.js"
@@ -58,8 +64,11 @@
 		}
 	},
 	"dependencies": {
-		"stylelint": "^14.10.0",
-		"stylelint-config-standard": "^27.0.0",
+		"postcss-html": "^1.5.0",
+		"postcss-less": "^6.0.0",
+		"postcss-scss": "^4.0.6",
+		"stylelint": "^14.16.0",
+		"stylelint-config-standard": "^29.0.0",
 		"stylelint-order": "^5.0.0"
 	}
 }

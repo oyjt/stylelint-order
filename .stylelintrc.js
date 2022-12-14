@@ -1,7 +1,35 @@
 module.exports = {
 	extends: "stylelint-config-standard",
+	overrides: [{
+		customSyntax: "postcss-scss",
+		files: ["**/*.css", "**/*.scss"]
+	}, {
+		customSyntax: "postcss-less",
+		files: ["**/*.less"]
+	}, {
+		customSyntax: "postcss-html",
+		files: ["**/*.html", "**/*.vue"]
+	}],
 	plugins: ['stylelint-order'],
 	rules: {
+		"alpha-value-notation": "number",
+		"at-rule-empty-line-before": "never",
+		"at-rule-no-unknown": [true, {
+			ignoreAtRules: ["content", "each", "error", "extend", "for", "function", "if", "include",
+				"mixin", "return", "while"
+			]
+		}],
+		"color-function-notation": "legacy",
+		"color-no-invalid-hex": true,
+		"comment-empty-line-before": "never",
+		"declaration-colon-newline-after": null,
+		"declaration-empty-line-before": "never",
+		"function-linear-gradient-no-nonstandard-direction": null,
+		"indentation": "tab",
+		"no-descending-specificity": null,
+		"no-empty-source": null,
+		"no-missing-end-of-source-newline": null,
+		"number-leading-zero": "never",
 		'order/properties-order': [{
 				// Must be first.
 				properties: ['all'],
