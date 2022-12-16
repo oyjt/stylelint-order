@@ -8,28 +8,22 @@ module.exports = {
 		files: ["**/*.less"]
 	}, {
 		customSyntax: "postcss-html",
-		files: ["**/*.html", "**/*.vue"]
+		files: ["**/*.html", "**/*.vue", "**/*.nvue"]
 	}],
 	plugins: ['stylelint-order'],
 	rules: {
-		"alpha-value-notation": "number",
-		"at-rule-empty-line-before": "never",
+		// 禁止未知单位
+		"unit-no-unknown": false,
+		// 为适用的颜色功能指定现代或传统符号
+		"color-function-notation": "legacy",
+		// 禁止无效的十六进制颜色
+		"color-no-invalid-hex": true,
+		// 不允许未知的规则
 		"at-rule-no-unknown": [true, {
 			ignoreAtRules: ["content", "each", "error", "extend", "for", "function", "if", "include",
-				"mixin", "return", "while"
+				"mixin", "return", "while", "tailwind", "apply", "variants", "responsive", "screen"
 			]
 		}],
-		"color-function-notation": "legacy",
-		"color-no-invalid-hex": true,
-		"comment-empty-line-before": "never",
-		"declaration-colon-newline-after": null,
-		"declaration-empty-line-before": "never",
-		"function-linear-gradient-no-nonstandard-direction": null,
-		"indentation": "tab",
-		"no-descending-specificity": null,
-		"no-empty-source": null,
-		"no-missing-end-of-source-newline": null,
-		"number-leading-zero": "never",
 		'order/properties-order': [{
 				// Must be first.
 				properties: ['all'],
