@@ -2,21 +2,21 @@
 
 ## 说明
 
-基于stylelint的样式排序插件，用于HBuilder X编译器中的css、less、sass样式排序和修正。
+基于stylelint的样式排序插件，也可以用于HBuilder X编译器中的css、less、sass样式格式化。
 
 ## 使用说明
 
 1. 安装插件后，在HBuilde X中打开html、vue、nvue、css、less、scss、sass等文件
-2. 右击选择【样式格式化】即可对样式进行自动排序
+2. 右击选择【样式格式化】即可对样式进行自动格式化
 
 ## 配置文件，如何配置选项？
 
-stylelint-order配置文件是.stylelintrc.js，如果项目中存在.stylelintrc.js文件，以项目中的配置为准。
+配置文件是.stylelintrc.js，如果项目中存在.stylelintrc.js文件，以项目中的配置为准。
 点击菜单工具 -> 插件配置 -> stylelint-order -> .stylelintrc.js，即可打开配置文件。
 
 > 经过测试HBuilderX 中使用ctrl+s不会触发保存时自动格式化，具体原因未知，可能是编译器的限制导致的。
 
-## 排序顺序
+## 样式排序顺序
 使用的是Bootstrap的CSS排序规则，相关的属性声明应当归为一组，并按照下面的顺序排列：
 
 1. Positioning
@@ -29,15 +29,38 @@ stylelint-order配置文件是.stylelintrc.js，如果项目中存在.stylelintr
 
 其他属性只是影响组件的 内部 或者是不影响前两组属性，因此排在后面。
 
-## 如何修改排序规则？
+## 如何修改规则？
 
-修改.stylelintrc.js文件，在`order/properties-order`属性中调整排序规则，比如: 
+修改.stylelintrc.js文件，在`rules`属性中调整规则，在`order/properties-order`属性中调整排序规则。
+默认规则如下: 
 
 ```javascript
 module.exports = {
   extends: "stylelint-config-standard",
+  overrides: [{
+  	customSyntax: "postcss-scss",
+  	files: ["**/*.css", "**/*.scss"]
+  }, {
+  	customSyntax: "postcss-less",
+  	files: ["**/*.less"]
+  }, {
+  	customSyntax: "postcss-html",
+  	files: ["**/*.html", "**/*.vue", "**/*.nvue"]
+  }],
   plugins: ["stylelint-order"],
   rules: {
+	// 禁止未知单位
+	"unit-no-unknown": false,
+	// 为适用的颜色功能指定现代或传统符号
+	"color-function-notation": "legacy",
+	// 禁止无效的十六进制颜色
+	"color-no-invalid-hex": true,
+	// 不允许未知的规则
+	"at-rule-no-unknown": [true, {
+		ignoreAtRules: ["content", "each", "error", "extend", "for", "function", "if", "include",
+			"mixin", "return", "while", "tailwind", "apply", "variants", "responsive", "screen"
+		]
+	}],
     "order/properties-order": [
       {
         // Must be first.

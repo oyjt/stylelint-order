@@ -2,7 +2,7 @@
 	"name": "stylelint-order",
 	"id": "stylelint-order",
 	"displayName": "stylelint-order",
-	"description": "一个基于stylint和bootstrap规范的样式排序插件。",
+	"description": "一个基于stylint和bootstrap规范的样式排序插件，也可以用于样式的格式化。",
 	"version": "1.0.5",
 	"publisher": "江阳小道",
 	"engines": {
@@ -21,12 +21,10 @@
 		"onLanguage:scss"
 	],
 	"contributes": {
-		"commands": [
-			{
-				"command": "stylelint.formatter",
-				"title": "样式格式化"
-			}
-		],
+		"commands": [{
+			"command": "stylelint.formatter",
+			"title": "样式格式化"
+		}],
 		"configuration": {
 			"title": "stylelint-order",
 			"properties": {
@@ -38,22 +36,18 @@
 			}
 		},
 		"menus": {
-			"editor/context": [
-				{
-					"command": "stylelint.formatter",
-					"group": "assist",
-					"when": "editorTextFocus"
-				}
-			]
-		},
-		"keybindings": [
-			{
-				"macosx": "command+shift+i",
-				"key": "shift+f10",
+			"editor/context": [{
 				"command": "stylelint.formatter",
+				"group": "assist",
 				"when": "editorTextFocus"
-			}
-		]
+			}]
+		},
+		"keybindings": [{
+			"macosx": "command+shift+i",
+			"key": "shift+f10",
+			"command": "stylelint.formatter",
+			"when": "editorTextFocus"
+		}]
 	},
 	"configurationFiles": [
 		".stylelintrc.js"
