@@ -8,7 +8,8 @@ const CSS_FILE_SUPPORT = ['css', 'less', 'scss', 'sass']
 
 let output = null;
 
-function showOutput(msg) {
+function showOutput(msg)
+{
 	if (!output) output = hx.window.createOutputChannel('stylelint-order');
 	// output.clear();
 	output.show();
@@ -16,8 +17,10 @@ function showOutput(msg) {
 	output.append(msg);
 }
 
-function getEmbeddedBlock(args) {
-	const {
+function getEmbeddedBlock(args)
+{
+	const
+	{
 		document
 	} = args;
 	let content = null;
@@ -27,9 +30,11 @@ function getEmbeddedBlock(args) {
 	let syntax = 'css';
 	const text = document.getText();
 	const textLangth = text.length;
-	while (pos < textLangth) {
+	while (pos < textLangth)
+	{
 		char = text.charAt(pos);
-		if (char === '<' && text.substr(pos, 6) === '<style') {
+		if (char === '<' && text.substr(pos, 6) === '<style')
+		{
 			let tag = '';
 			do {
 				char = text.charAt(pos);
@@ -41,7 +46,8 @@ function getEmbeddedBlock(args) {
 			startIndex = pos + 2;
 		}
 
-		if (char === '<' && text.substr(pos, 8) === '</style>') {
+		if (char === '<' && text.substr(pos, 8) === '</style>')
+		{
 			content = text.substring(startIndex, pos);
 			const range = {
 				start: startIndex,
@@ -59,8 +65,10 @@ function getEmbeddedBlock(args) {
 	}
 }
 
-function getCssBlock(args) {
-	const {
+function getCssBlock(args)
+{
+	const
+	{
 		document,
 		selection,
 		languageId
@@ -68,14 +76,17 @@ function getCssBlock(args) {
 	let range = null;
 	let content = null;
 
-	if (!selection || (selection && selection.isEmpty())) {
+	if (!selection || (selection && selection.isEmpty()))
+	{
 		const end = document.getText().length
 		range = {
 			start: 0,
 			end: end
 		};
 		content = document.getText();
-	} else {
+	}
+	else
+	{
 		range = {
 			start: selection.start,
 			end: selection.end
@@ -90,19 +101,26 @@ function getCssBlock(args) {
 	};
 }
 
-function getBlock(args) {
-	const {
+function getBlock(args)
+{
+	const
+	{
 		languageId,
 		document,
 		selection
 	} = args
 	let block = null;
-	if (~EMBEDDED_FILE_SUPPORT.indexOf(languageId)) {
-		block = getEmbeddedBlock({
+	if (~EMBEDDED_FILE_SUPPORT.indexOf(languageId))
+	{
+		block = getEmbeddedBlock(
+		{
 			document
 		});
-	} else if (~CSS_FILE_SUPPORT.indexOf(languageId)) {
-		block = getCssBlock({
+	}
+	else if (~CSS_FILE_SUPPORT.indexOf(languageId))
+	{
+		block = getCssBlock(
+		{
 			document,
 			selection,
 			languageId
@@ -112,22 +130,28 @@ function getBlock(args) {
 }
 
 //该方法将在插件激活的时候调用
-function activate(context) {
-	const onCommand = hx.commands.registerTextEditorCommand('stylelint.formatter', function(textEditor) {
-		const {
+function activate(context)
+{
+	const onCommand = hx.commands.registerTextEditorCommand('stylelint.formatter', function(textEditor)
+	{
+		const
+		{
 			document,
 			selection
 		} = textEditor;
-		const {
+		const
+		{
 			languageId
 		} = document;
-		const block = getBlock({
+		const block = getBlock(
+		{
 			languageId,
 			document,
 			selection
 		});
 		if (!block) return showOutput(`${ languageId } syntac not support now.`);
-		const {
+		const
+		{
 			range,
 			content,
 			syntax
@@ -135,16 +159,20 @@ function activate(context) {
 
 		const _options = require("./.stylelintrc.js")
 		if (process.env.EXTENSION_DATA_DIR &&
-			fs.existsSync(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js")) {
+			fs.existsSync(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js"))
+		{
 			_options = require(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js");
 		}
-		stylelint.lint({
+		stylelint.lint(
+		{
 			code: content,
 			config: _options,
 			configBasedir: path.join(__dirname, "/"),
 			fix: true
-		}).then((res) => {
-			textEditor.edit(builder => {
+		}).then((res) =>
+		{
+			textEditor.edit(builder =>
+			{
 				builder.replace(range, res.output);
 			})
 			// 执行系统格式化
@@ -152,24 +180,29 @@ function activate(context) {
 		}).catch(err => showOutput(err.stack));
 	});
 
-	const onSave = hx.workspace.onWillSaveTextDocument(function(event) {
-		const {
+	const onSave = hx.workspace.onWillSaveTextDocument(function(event)
+	{
+		const
+		{
 			document
 		} = event;
-		const {
+		const
+		{
 			languageId,
 			fileName
 		} = document;
 		const settings = hx.workspace.getConfiguration('stylelint-order');
 		const autoFixOnSave = settings.get('autoFixOnSave', false)
 		if (!autoFixOnSave) return null;
-		const block = getBlock({
+		const block = getBlock(
+		{
 			languageId,
 			document
 		});
 		console.log('block', block);
 		if (!block) return;
-		const {
+		const
+		{
 			range,
 			content,
 			syntax
@@ -177,15 +210,18 @@ function activate(context) {
 
 		const _options = require("./.stylelintrc.js")
 		if (process.env.EXTENSION_DATA_DIR &&
-			fs.existsSync(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js")) {
+			fs.existsSync(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js"))
+		{
 			_options = require(process.env.EXTENSION_DATA_DIR + "/.stylelintrc.js");
 		}
-		stylelint.lint({
+		stylelint.lint(
+		{
 			code: content,
 			config: _options,
 			configBasedir: path.join(__dirname, "/"),
 			fix: true
-		}).then((res) => {
+		}).then((res) =>
+		{
 			console.log('res', res.output);
 			hx.TextEdit.replace(range, res.output)
 			// 执行系统格式化
@@ -198,7 +234,8 @@ function activate(context) {
 	context.subscriptions.push(onSave)
 }
 //该方法将在插件禁用的时候调用（目前是在插件卸载的时候触发）
-function deactivate() {
+function deactivate()
+{
 
 }
 module.exports = {
